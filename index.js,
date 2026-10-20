@@ -1,0 +1,35 @@
+
+const mineflayer = require('mineflayer');
+
+const bot = mineflayer.createBot({
+  host: 'deadliestsmpmc.aternos.me',
+  port: 25565, // Aternos panel ka actual port daalna
+  username: 'botu',
+  auth: 'offline'
+});
+
+const password = 'krishna779';
+
+bot.once('spawn', () => {
+  console.log('Botu server mein aa gaya!');
+
+  setTimeout(() => {
+    bot.chat(`/register ${password} ${password}`);
+
+    setTimeout(() => {
+      bot.chat(`/login ${password}`);
+    }, 3000);
+  }, 2000);
+});
+
+bot.on('kicked', (reason) => {
+  console.log('Server ne kick kiya:', reason);
+});
+
+bot.on('end', () => {
+  console.log('Bot disconnect ho gaya.');
+});
+
+bot.on('error', (err) => {
+  console.log('Error:', err.message);
+});
